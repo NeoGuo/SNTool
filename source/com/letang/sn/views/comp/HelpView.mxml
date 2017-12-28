@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" title="帮助"
+		 width="600" height="500" close="closeHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import flash.net.navigateToURL;
+			
+			import mx.events.CloseEvent;
+			import mx.managers.PopUpManager;
+			
+			protected function closeHandler(event:CloseEvent):void
+			{
+				PopUpManager.removePopUp(this);
+			}
+			public function jiaqun():void
+			{
+				var request:URLRequest = new URLRequest("http://shang.qq.com/wpa/qunwpa?idkey=ec9df8bdaeea54a294e91417a1f7712149334d0a66aeb90eee7de376d6744afe");
+				navigateToURL(request);
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:layout>
+		<s:VerticalLayout paddingLeft="20" paddingRight="20" paddingTop="20" paddingBottom="20" gap="20" horizontalAlign="center"/>
+	</s:layout>
+	<s:Label text="软件下载，使用教程，寻求帮助，行业动态，信息交流，请加QQ群:" />
+	<s:Group width="100%" height="50">
+		<s:Label text="638743219" fontSize="40" color="#2a93d6" horizontalCenter="0" verticalCenter="0"/>
+		<s:Button width="240" height="70" horizontalCenter="0" verticalCenter="-5" alpha=".2" click="jiaqun()"/>
+	</s:Group>
+	<s:BorderContainer width="100%" borderAlpha=".4" height="1" />
+	<s:Image source="img/1514378380059.png" />
+</s:TitleWindow>

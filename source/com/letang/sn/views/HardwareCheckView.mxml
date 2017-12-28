@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 width="100%" height="100%" 
+		 creationComplete="creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			[Bindable]
+			private var mediator:HardwareCheckViewMediator;
+			
+			protected function creationCompleteHandler(event:FlexEvent):void{
+				mediator = new HardwareCheckViewMediator(this);
+				mediator.init();
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:states>
+		<s:State name="normal" />
+		<s:State name="running" />
+	</s:states>
+	<s:HGroup top="10" right="20">
+		<s:Label text="打码余额:" fontSize="20" color="#333333"/>
+		<s:Button width="120" label="{mediator.damaMoney}"
+				  click="mediator.damaObj.getMoney()"
+				  chromeColor="#000000" color="#FFFFFF"/>
+		<s:Spacer width="40" />
+		<s:Button width="120" label="设置"
+				  click="mediator.openSettingWindow()"
+				  chromeColor="#0000CD" color="#FFFFFF"/>
+		<s:Button width="120" label="帮助"
+				  click="mediator.openHelpWindow()"
+				  chromeColor="#0000CD" color="#FFFFFF"/>
+	</s:HGroup>
+	<s:Group width="100%" height="100%">
+		<s:layout>
+			<s:VerticalLayout paddingLeft="20" paddingRight="20" paddingTop="20" paddingBottom="20" gap="10"/>
+		</s:layout>
+		<s:Label text="待检测格式应该是文本格式，每行一个序列号" />
+		<s:HGroup width="100%">
+			<s:TextInput text="{mediator.snFilePath}" width="100%" enabled="false"/>
+			<s:Button id="btnChoose" click="mediator.chooseFile()" label="选择要检测的列表文件" />
+		</s:HGroup>
+		<s:HGroup width="100%" horizontalAlign="center" verticalAlign="middle">
+			<mx:ProgressBar id="pBar" mode="manual" width="100%" label="..."/>
+		</s:HGroup>
+		<s:HGroup width="100%" height="80" fontSize="20" enabled="{mediator.snFilePath!=null}">
+			<s:Button id="btnStart" enabled="{currentState=='normal'}" 
+					  click="mediator.startTask()" label="▶ 开始" 
+					  width="50%" height="100%" chromeColor="#FF0000"/>
+			<s:Button id="btnStop" enabled="{currentState=='running'}" 
+					  click="mediator.stopTask()" label="■ 停止" 
+					  width="50%" height="100%" chromeColor="#00FF00"/>
+		</s:HGroup>
+		<s:HGroup width="100%" height="80" fontSize="20" verticalAlign="middle">
+			<s:VGroup width="50%" paddingLeft="20">
+				<s:HGroup horizontalAlign="left" textAlign="left" fontSize="14">
+					<s:Label width="120" text="总量" color="#999999"/>
+					<s:Label width="120" text="未检测量" color="#999999"/>
+					<s:Label width="120" text="有效数量" color="#999999"/>
+					<s:Label width="120" text="无效数量" color="#999999"/>
+					<s:Label width="120" text="当前指针" color="#999999"/>
+					<s:Label width="120" text="正在处理" color="#999999"/>
+				</s:HGroup>
+				<s:HGroup horizontalAlign="left" textAlign="left" fontSize="30">
+					<s:Label width="120" text="{mediator.snNum}"/>
+					<s:Label width="120" text="{mediator.wailtNum}"/>
+					<s:Label width="120" text="{mediator.snRealNum}"/>
+					<s:Label width="120" text="{mediator.snInvaNum}"/>
+					<s:Label width="120" text="{mediator.currentIndex+1}"/>
+					<s:Label width="120" text="{mediator.currentBatchLen}"/>
+				</s:HGroup>
+			</s:VGroup>
+			<s:BorderContainer width="150" height="80">
+				<s:Label text="{mediator.timerCode}" color="#999999" fontSize="40" horizontalCenter="0" verticalCenter="5"/>
+			</s:BorderContainer>
+		</s:HGroup>
+		<s:HGroup width="100%" height="100%">
+			<s:TextArea width="50%" height="100%" text="{mediator.validateMsg}" />
+			<s:TextArea width="50%" height="100%" text="{mediator.pyValidateMsg}" />
+		</s:HGroup>
+		<s:HGroup width="100%" horizontalAlign="center" verticalAlign="middle" enabled="{mediator.snFilePath!=null}">
+			<s:Button click="mediator.openList(1)" label="打开有效列表" />
+			<s:Button click="mediator.openList(2)" label="打开无效列表" />
+			<s:Button click="mediator.adslTool.closeADSL()" label="断开ADSL" />
+			<s:Button click="mediator.adslTool.openADSL()" label="连接ADSL" />
+			<s:Label text="拨号次数:{mediator.adslCount}" />
+		</s:HGroup>
+	</s:Group>
+</s:Group>

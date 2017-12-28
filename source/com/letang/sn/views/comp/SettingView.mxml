@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" title="设置"
+		 width="600" height="500" close="closeHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.letang.sn.views.HardwareCheckViewMediator;
+			
+			import mx.events.CloseEvent;
+			import mx.managers.PopUpManager;
+			[Bindable]
+			public var mediator:HardwareCheckViewMediator;
+			
+			protected function closeHandler(event:CloseEvent):void
+			{
+				PopUpManager.removePopUp(this);
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:layout>
+		<s:VerticalLayout paddingLeft="20" paddingRight="20" paddingTop="20" paddingBottom="20" gap="20"/>
+	</s:layout>
+	<s:Label text="Python设定:" />
+	<s:HGroup width="100%">
+		<s:TextInput text="@{mediator.pythonPath}" width="100%" prompt="python路径"/>
+		<s:Button label="保存" click="mediator.savePythonPath()"/>
+	</s:HGroup>
+	<s:BorderContainer width="100%" borderAlpha=".4" height="1" />
+	<s:Label text="宽带设定:" />
+	<s:HGroup width="100%" verticalAlign="middle">
+		<s:Label text="宽带账号：" />
+		<s:TextInput text="@{mediator.adslName}" width="100%" prompt="xxx@adsl"/>
+		<s:Label text="宽带密码：" />
+		<s:TextInput text="@{mediator.adslPass}" width="100" displayAsPassword="true"/>
+		<s:Button label="保存" click="mediator.saveADSLInfo()"/>
+	</s:HGroup>
+	<s:BorderContainer width="100%" borderAlpha=".4" height="1" />
+	<s:Label text="打码设定(云打码):" />
+	<s:HGroup width="100%" verticalAlign="middle">
+		<s:Label text="云打码平台的用户名：" />
+		<s:TextInput text="@{mediator.damaName}" width="100%" prompt="xxx"/>
+		<s:Label text="密码：" />
+		<s:TextInput text="@{mediator.damaPass}" width="100" displayAsPassword="true"/>
+		<s:Button label="保存" click="mediator.saveDamaInfo()"/>
+	</s:HGroup>
+	<s:BorderContainer width="100%" borderAlpha=".4" height="1" />
+</s:TitleWindow>
