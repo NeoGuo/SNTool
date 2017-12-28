@@ -11,5 +11,4 @@ UI展示:
 
 ![image](https://raw.githubusercontent.com/NeoGuo/SNTool/master/sn_tool_mainUI.png)
 
-## 软件下载，使用教程，寻求帮助，请加QQ群:
-## 638743219
+## 软件下载，使用教程，寻求帮助，请加QQ群:638743219
