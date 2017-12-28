@@ -9,4 +9,4 @@
 
 UI展示:
 
-![image](http://github.com/NeoGuo/SNTool/raw/master/sn_tool_mainUI.png)
+![image](https://raw.githubusercontent.com/NeoGuo/SNTool/master/sn_tool_mainUI.png)
